@@ -25,10 +25,6 @@ require __DIR__ . '/top.php';
                 <label for="personalCode">Asmens kodas</label>
                 <input type="number" name="personalCode" placeholder="" value="<?= $old['personalCode'] ?? '' ?>">
             </div>
-            <!-- <div>
-                <label for="accNumber">Account number</label>
-                <input type="number" name="accNumber" placeholder="Account number" value="<?= $old['accNumber'] ?? '' ?>">
-            </div> -->
             <button type="submit" class="menu-btn">Sukurti</button>
         </div>
     </form>

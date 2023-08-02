@@ -8,7 +8,10 @@
         <a href="<?= URL ?>create.php">Add account</a>
     </div>
     <div class="menu-btn">
-        <a href="<?= URL ?>edit.php">Edit money to customer account</a>
+        <a href="<?= URL ?>edit.php">Prideti pinigu</a>
+    </div>
+    <div class="menu-btn">
+        <a href="<?= URL ?>edit2.php">Nuimti pinigu</a>
     </div>
     <?php if (isset($_SESSION['login']) && $_SESSION['login'] == 1) : ?>
         <form action="<?= URL ?>logout.php" method="post">

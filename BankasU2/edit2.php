@@ -8,7 +8,7 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] != 1) {
     die;
 }
 
-$title = 'Add money to customer';
+$title = 'Minus money to customer';
 require __DIR__ . '/top.php';
 
 $old = $_SESSION['old_values'] ?? [];
@@ -42,9 +42,9 @@ $accounts = json_decode(file_get_contents(__DIR__ . '/accounts.json'), 1);
                     <td><?= $account['personalCode'] ?></td>
                     <td><?= $account['money'] ?></td>
                     <td>
-                        <form action="<?= URL ?>update.php?id=<?= $account['id'] ?>" method="post">
-                            <input type="number" name="money" placeholder="Add money to account" value="money">
-                            <button type="submit">Prideti</button>
+                        <form action="<?= URL ?>minus.php?id=<?= $account['id'] ?>" method="post">
+                            <input type="number" name="money" placeholder="Subtract money from account" value="money">
+                            <button type="submit">Nuimti</button>
                             <a href="<?= URL ?>main.php">Cancel</a>
                         </form>
                     </td>
