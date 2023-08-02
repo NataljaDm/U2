@@ -1,0 +1,18 @@
+.msg {
+    padding: 15px 30px;
+    font-size: 18px;
+    text-align: center;
+    position: fixed;
+    top: 800px;
+    right: 20px;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  #msg {
+    display: none;
+  }
+  
+  #msg:checked + label {
+    display: none;
+  }

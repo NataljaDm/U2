@@ -19,7 +19,6 @@ $lastName = $_POST['lastName'] ?? '';
 $money = $_POST['money'] ?? '';
 $randPersonal = rand(1, 6) . rand(1, 999999) . rand(1, 999) . rand(1, 9);
 
-
 $accounts = json_decode(file_get_contents(__DIR__ . '/accounts.json'), 1);
 
 $find = false;
@@ -28,8 +27,13 @@ foreach ($accounts as $key => $acc) {
     if ($acc['id'] == $_GET['id']) {
         $find = true;
         $currentMoney = $acc['money'];
-        $newMoney = $currentMoney + $money;
-        $accounts[$key]['money'] = $newMoney;
+        $newMoney = $currentMoney - $money;
+        if ($newMoney < 0) {
+            $newMoney = 0;
+        } else {
+            $accounts[$key]['money'] = $newMoney;
+        }
+
 
         $accounts[$key] = [
             'id' => uniqid(),
@@ -45,7 +49,7 @@ foreach ($accounts as $key => $acc) {
 }
 
 $_SESSION['message'] = [
-    'text' => $find ? 'Money added' : 'Money not added',
+    'text' => $find ? 'Money subtracted from account' : 'Money not subtracted',
     'type' => $find ? 'green' : 'red'
 ];
 

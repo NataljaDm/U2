@@ -1,0 +1,11 @@
+.login {
+    border-radius: 10px;
+    background-color: rgb(119, 153, 153);
+  }
+  .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: rgb(219, 219, 219);
+  }

@@ -1,32 +1,34 @@
 <?php
+
 require __DIR__ . '/bootstrap.php';
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-    http_response_code(405);    // Method Not Allowed
+    http_response_code(405);
     die;
 }
 
 if (!isset($_GET['id'])) {
-    header('Location: ' . URL . 'list.php');
+    header('Location:' . URL . 'main.php');
     die;
 }
 
-$colors = json_decode(file_get_contents(__DIR__ . '/colors.json'), 1);
+$accounts = json_decode(file_get_contents(__DIR__ . '/accounts.json'), 1);
 
 $find = false;
-foreach ($colors as $key => $c) {
-    if ($c['id'] == $_GET['id']) {
+
+foreach ($accounts as $key => $acc) {
+    if ($acc['id'] == $_GET['id'] && $acc['money'] == 0) {
         $find = true;
-        unset($colors[$key]);
-        file_put_contents(__DIR__ . '/colors.json', json_encode($colors));
+        unset($accounts[$key]);
+        file_put_contents(__DIR__ . '/accounts.json', json_encode($accounts));
         break;
     }
 }
 
 $_SESSION['message'] = [
-    'text' => $find ? 'Color deleted!' : 'Color not found!',
-    'type' => $find ? 'limegreen' : 'crimson'
+    'text' => $find ? 'Person account deleted!' : 'Person not found or account have money',
+    'type' => $find ? 'green' : 'red'
 ];
 
-header('Location: ' . URL . 'list.php');
+header('Location: ' . URL . 'main.php');
 die;

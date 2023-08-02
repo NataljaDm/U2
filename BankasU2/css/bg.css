@@ -1,0 +1,6 @@
+.bg {   
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; 
+  background-color: rgb(214, 200, 228);
+  }

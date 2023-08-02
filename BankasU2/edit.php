@@ -1,49 +1,66 @@
 <?php
+
 require __DIR__ . '/bootstrap.php';
-if (!isset($_GET['id'])) {
-    header('Location: ' . URL . 'list.php');
+
+if (!isset($_SESSION['login']) || $_SESSION['login'] != 1) {
+
+    header('Location: ' . URL . 'index.php');
     die;
 }
 
-$colors = json_decode(file_get_contents(__DIR__ . '/colors.json'), 1);
-
-$color = false;
-
-foreach ($colors as $c) {
-    if ($c['id'] == $_GET['id']) {
-        $color = $c;
-        break;
-    }
-}
-
-if ($color === false) {
-    header('Location: ' . URL . 'list.php');
-    die;
-}
-
-$title = 'Colors - Edit color';
+$title = 'Add money to customer';
 require __DIR__ . '/top.php';
+
 $old = $_SESSION['old_values'] ?? [];
 unset($_SESSION['old_values']);
+
+$accounts = json_decode(file_get_contents(__DIR__ . '/accounts.json'), 1);
+
 ?>
-<?php require __DIR__ . '/msg.php' ?>
+
 <?php require __DIR__ . '/menu.php' ?>
-<div class="create">
-    <form action="<?= URL ?>update.php?id=<?= $color['id'] ?>" method="post">
-        <h1>Edit Color</h1>
-        <div class="form-row">
-            <label for="name">Color name:</label>
-            <input type="text" name="name" placeholder="Color name" value="<?= $old['name'] ?? $color['name'] ?>">
-        </div>
-        <div class="form-row">
-            <label for="hex">Color hex:</label>
-            <input type="color" name="hex" placeholder="Color hex"  value="<?= $old['hex'] ?? $color['hex'] ?>">
-        </div>
-        <div class="form-row">
-            <button class="green" type="submit">Save</button>
-            <a class="red" href="<?= URL ?>list.php">Calncel</a>
-        </div>
-    </form>
+<?php require __DIR__ . '/msg.php' ?>
+
+<div class="add">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Account id</th>
+                <th scope="col">Account Number</th>
+                <th scope="col">User Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Personal Code</th>
+                <th scope="col">Money</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($accounts as $account) : ?>
+                <tr>
+                    <th scope="row"><?= $account['id'] ?></th>
+                    <td><?= $account['accNumber'] ?></td>
+                    <td><?= $account['name'] ?></td>
+                    <td><?= $account['lastName'] ?></td>
+                    <td><?= $account['personalCode'] ?></td>
+                    <td><?= $account['money'] ?></td>
+                    <td>
+                        <form action="<?= URL ?>update.php?id=<?= $account['id'] ?>" method="post">
+                            <input type="number" name="money" placeholder="Add money to account" value="money">
+                            <button type="submit">Add</button>
+                            <a href="<?= URL ?>main.php">Cancel</a>
+                        </form>
+                        <form action="<?= URL ?>minus.php?id=<?= $account['id'] ?>" method="post">
+                            <input type="number" name="money" placeholder="Subtract money from account" value="money">
+                            <button type="submit">Minus</button>
+                            <a href="<?= URL ?>main.php">Cancel</a>
+                        </form>
+                    </td>
+                </tr>
+            <?php endforeach ?>
+        </tbody>
+    </table>
 </div>
-<?php
-require __DIR__ . '/bottom.php';
+
+<?php require __DIR__ . '/bottom.php' ?>
+
+<!-- ?id=<?= $account['id'] ?> -->

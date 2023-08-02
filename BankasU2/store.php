@@ -1,18 +1,24 @@
 <?php
+
 require __DIR__ . '/bootstrap.php';
+require __DIR__ . '/msg.php';
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-    http_response_code(405);    // Method Not Allowed
+    http_response_code(405);
     die;
 }
 
-$hex = $_POST['hex'] ?? '';
 $name = $_POST['name'] ?? '';
+// $accNumber = $_POST['accNumber'] ?? '';
+$lastName = $_POST['lastName'] ?? '';
+// $randomCode = rand(999999999999999999, 999999999999999999);
+// $personalCode = $_POST['personalCode'] ?? '';
+$randPersonal = rand(1, 6) . rand(1, 999999) . rand(1, 999) . rand(1, 9);
 
-if ($hex == '' || $name == '') {
+if ($name == '' || $lastName == '') {
     $_SESSION['message'] = [
-        'text' => 'Please fill in all fields!',
-        'type' => 'crimson'
+        'text' => 'Laukeliai turi buti uzpildyti',
+        'type' => 'red'
     ];
     $_SESSION['old_values'] = $_POST;
     header('Location: ' . URL . 'create.php');
@@ -21,30 +27,37 @@ if ($hex == '' || $name == '') {
 
 if (strlen($name) < 4) {
     $_SESSION['message'] = [
-        'text' => 'Name must be at least 4 characters long!',
-        'type' => 'crimson'
+        'text' => 'Name turi buti daugiau nei 4 raides',
+        'type' => 'red'
     ];
     $_SESSION['old_values'] = $_POST;
     header('Location: ' . URL . 'create.php');
     die;
 }
 
-$colors = json_decode(file_get_contents(__DIR__ . '/colors.json'), 1);
+$accounts = json_decode(file_get_contents(__DIR__ . '/accounts.json'), 1);
 
-$color = [
+$account = [
     'id' => uniqid(),
+    'personalCode' => $randPersonal,
     'name' => $name,
-    'hex' => $hex
+    'lastName' => $lastName,
+    'accNumber' => 'LT' . rand(1, 999999999999999999),
+    'money' => 0
 ];
 
-$colors[] = $color;
-file_put_contents(__DIR__ . '/colors.json', json_encode($colors));
+$accounts[] = $account;
 
+usort($accounts, function ($a, $b) {
+    return strcmp($a['lastName'], $b['lastName']);
+});
+
+file_put_contents(__DIR__ . '/accounts.json', json_encode($accounts));
 
 $_SESSION['message'] = [
-    'text' => 'Color created!',
-    'type' => 'limegreen'
+    'text' => 'Person account created',
+    'type' => 'green'
 ];
 
-header('Location: ' . URL . 'list.php');
+header('Location: ' . URL . 'main.php');
 die;
