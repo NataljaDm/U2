@@ -12,8 +12,8 @@ $name = $_POST['name'] ?? '';
 // $accNumber = $_POST['accNumber'] ?? '';
 $lastName = $_POST['lastName'] ?? '';
 // $randomCode = rand(999999999999999999, 999999999999999999);
-// $personalCode = $_POST['personalCode'] ?? '';
-$randPersonal = rand(1, 6) . rand(1, 999999) . rand(1, 999) . rand(1, 9);
+$personalCode = $_POST['personalCode'] ?? '';
+//$randPersonal = rand(1, 6) . rand(1, 999999) . rand(1, 999) . rand(1, 9);
 
 if ($name == '' || $lastName == '') {
     $_SESSION['message'] = [
@@ -34,12 +34,21 @@ if (strlen($name) < 4) {
     header('Location: ' . URL . 'create.php');
     die;
 }
+if (strlen($personalCode) < 11) {
+    $_SESSION['message'] = [
+        'text' => 'Kodas turi buti is 11 skaiciu',
+        'type' => 'red'
+    ];
+    $_SESSION['old_values'] = $_POST;
+    header('Location: ' . URL . 'create.php');
+    die;
+}
 
 $accounts = json_decode(file_get_contents(__DIR__ . '/accounts.json'), 1);
 
 $account = [
-    'id' => uniqid(),
-    'personalCode' => $randPersonal,
+    'id' => rand(1, 10),
+    'personalCode' => $personalCode,
     'name' => $name,
     'lastName' => $lastName,
     'accNumber' => 'LT' . rand(1, 999999999999999999),

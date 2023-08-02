@@ -1,20 +1,7 @@
 <?php
-
 require __DIR__ . '/bootstrap.php';
-
-
-if (!isset($_SESSION['login']) || $_SESSION['login'] != 1) {
-
-    header('Location: ' . URL . 'index.php');
-    die;
-}
-
-$title = 'Add customer';
+$title = 'Naujas klientas';
 require __DIR__ . '/top.php';
-
-$old = $_SESSION['old_values'] ?? [];
-unset($_SESSION['old_values']);
-
 ?>
 
 <?php require __DIR__ . '/menu.php' ?>
@@ -24,24 +11,25 @@ unset($_SESSION['old_values']);
 
 <div class="add">
     <form action="<?= URL ?>store.php" method="post">
+    <h1>Naujas klientas</h1>
         <div>
-            <label for="name">Name</label>
-            <input type="text" name="name" placeholder="User name" value="<?= $old['name'] ?? '' ?>">
+            <label for="name">Vardas</label>
+            <input type="text" name="name" placeholder="" value="<?= $old['name'] ?? '' ?>">
         </div>
         <div>
-            <label for="lastName">Last name</label>
-            <input type="text" name="lastName" placeholder="User last name" value="<?= $old['lastName'] ?? '' ?>">
+            <label for="lastName">Pavardė</label>
+            <input type="text" name="lastName" placeholder="" value="<?= $old['lastName'] ?? '' ?>">
         </div>
         <div>
-            <!-- <div>
-                <label for="personalCode">Personal code</label>
-                <input type="number" name="personalCode" placeholder="Personal code" value="<?= $old['personalCode'] ?? '' ?>">
-            </div> -->
+            <div>
+                <label for="personalCode">Asmens kodas</label>
+                <input type="number" name="personalCode" placeholder="" value="<?= $old['personalCode'] ?? '' ?>">
+            </div>
             <!-- <div>
                 <label for="accNumber">Account number</label>
                 <input type="number" name="accNumber" placeholder="Account number" value="<?= $old['accNumber'] ?? '' ?>">
             </div> -->
-            <button type="submit" class="menu-btn">Add</button>
+            <button type="submit" class="menu-btn">Sukurti</button>
         </div>
     </form>
 </div>

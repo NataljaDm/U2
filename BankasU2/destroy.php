@@ -26,7 +26,7 @@ foreach ($accounts as $key => $acc) {
 }
 
 $_SESSION['message'] = [
-    'text' => $find ? 'Person account deleted!' : 'Person not found or account have money',
+    'text' => $find ? 'Saskaita istrinta!' : 'Negalima trinti! Saskaitoje yra pinigu',
     'type' => $find ? 'green' : 'red'
 ];
 
