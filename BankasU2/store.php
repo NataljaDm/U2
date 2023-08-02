@@ -9,15 +9,12 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 }
 
 $name = $_POST['name'] ?? '';
-// $accNumber = $_POST['accNumber'] ?? '';
 $lastName = $_POST['lastName'] ?? '';
-// $randomCode = rand(999999999999999999, 999999999999999999);
 $personalCode = $_POST['personalCode'] ?? '';
-//$randPersonal = rand(1, 6) . rand(1, 999999) . rand(1, 999) . rand(1, 9);
 
 if ($name == '' || $lastName == '') {
     $_SESSION['message'] = [
-        'text' => 'Laukeliai turi buti uzpildyti',
+        'text' => 'Visi laukeliai turi buti uzpildyti',
         'type' => 'red'
     ];
     $_SESSION['old_values'] = $_POST;
@@ -27,7 +24,17 @@ if ($name == '' || $lastName == '') {
 
 if (strlen($name) < 4) {
     $_SESSION['message'] = [
-        'text' => 'Name turi buti daugiau nei 4 raides',
+        'text' => 'Vardas turi buti daugiau nei 4 raides',
+        'type' => 'red'
+    ];
+    $_SESSION['old_values'] = $_POST;
+    header('Location: ' . URL . 'create.php');
+    die;
+}
+
+if (strlen($lastName) < 4) {
+    $_SESSION['message'] = [
+        'text' => 'Pavarde turi buti daugiau nei 4 raides',
         'type' => 'red'
     ];
     $_SESSION['old_values'] = $_POST;
@@ -64,7 +71,7 @@ usort($accounts, function ($a, $b) {
 file_put_contents(__DIR__ . '/accounts.json', json_encode($accounts));
 
 $_SESSION['message'] = [
-    'text' => 'Person account created',
+    'text' => 'Naujas klientas pridetas',
     'type' => 'green'
 ];
 

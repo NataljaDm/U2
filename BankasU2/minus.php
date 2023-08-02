@@ -13,9 +13,7 @@ if (!isset($_GET['id'])) {
 }
 
 $name = $_POST['name'] ?? '';
-// $accNumber = $_POST['accNumber'] ?? '';
 $lastName = $_POST['lastName'] ?? '';
-// $personalCode = $_POST['personalCode'] ?? '';
 $money = $_POST['money'] ?? '';
 $randPersonal = rand(1, 6) . rand(1, 999999) . rand(1, 999) . rand(1, 9);
 
@@ -49,7 +47,7 @@ foreach ($accounts as $key => $acc) {
 }
 
 $_SESSION['message'] = [
-    'text' => $find ? 'Money subtracted from account' : 'Money not subtracted',
+    'text' => $find ? 'Pinigai nuimti' : 'Pinigai ne nuimti',
     'type' => $find ? 'green' : 'red'
 ];
 

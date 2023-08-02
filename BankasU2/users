@@ -1,9 +1,9 @@
 <?php
 
 $users = [
-    ['id' => 1, 'name' => 'natalja', 'email' => 'natalja@gmail.com', 'psw' => md5('123')],
+    ['id' => 1, 'name' => 'admin', 'email' => 'admin@gmail.com', 'psw' => md5('123')],
     ['id' => 2, 'name' => 'jonas', 'email' => 'jonas@gmail.com', 'psw' => md5('456')],
-    ['id' => 3, 'name' => 'petras', 'email' => 'petras@gmail.com', 'psw' => md5('789')],
+    ['id' => 3, 'name' => 'natalja', 'email' => 'natalja@gmail.com', 'psw' => md5('789')],
     
 ];
 

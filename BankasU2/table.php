@@ -11,7 +11,7 @@
 
     ?>
     <table class="table">
-        <thead class="thead-dark">
+        <thead class="thead-purple">
             <tr>
                
                 <th scope="col">Saskaitos numeris</th>
@@ -34,12 +34,6 @@
                         <form action="<?= URL ?>destroy.php?id=<?= $account['id'] ?>" method="post">
                             <button type="submit" class="menu-btn">Istrinti klienta</button>
                         </form>
-                        <!--form action="<?= URL ?>edit.php?id=<?= $account['id'] ?>" method="post">
-                            <button type="submit" class="menu-btn">Pinigu operacijos</button>
-                        </form>-->
-                        <!-- <form action="<?= URL ?>subtract.php?id=<?= $account['id'] ?>" method="post">
-                            <button type="submit">Subtract money</button>
-                        </form> -->
                     </td>
                 </tr>
             <?php endforeach ?>

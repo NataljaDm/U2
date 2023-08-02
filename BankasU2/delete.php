@@ -31,7 +31,7 @@ if ($acc === false) {
 }
 if ($acc['sum'] != '0') {
     $_SESSION['message'] = [
-        'text' => 'You can\'t delete account that has funds!',
+        'text' => 'Negalima istrinti klienta!',
         'type' => 'crimson'
     ];
     header('Location: ' . URL . 'list.php');

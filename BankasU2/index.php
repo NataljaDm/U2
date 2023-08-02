@@ -32,14 +32,14 @@ require __DIR__ . '/top.php';
     <div class="login" style="width: 500px; height: 300px; border: 1px solid grey;">
         <form method="post" action="<?= URL ?>index.php">
             <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
+                <label for="exampleInputEmail1">Email</label>
                 <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email">
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
                 <input type="password" class="form-control" name="psw" placeholder="Password">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Prisijungti</button>
         </form>
     </div>
 </div>

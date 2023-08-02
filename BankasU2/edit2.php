@@ -8,7 +8,7 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] != 1) {
     die;
 }
 
-$title = 'Minus money to customer';
+$title = 'Subtract money to customer';
 require __DIR__ . '/top.php';
 
 $old = $_SESSION['old_values'] ?? [];
@@ -23,7 +23,7 @@ $accounts = json_decode(file_get_contents(__DIR__ . '/accounts.json'), 1);
 
 <div class="add">
     <table class="table">
-        <thead class="thead-dark">
+        <thead class="thead-purple">
         <tr>
                 <th scope="col">Saskaitos numeris</th>
                 <th scope="col">Vardas</th>
@@ -43,7 +43,7 @@ $accounts = json_decode(file_get_contents(__DIR__ . '/accounts.json'), 1);
                     <td><?= $account['money'] ?></td>
                     <td>
                         <form action="<?= URL ?>minus.php?id=<?= $account['id'] ?>" method="post">
-                            <input type="number" name="money" placeholder="Subtract money from account" value="money">
+                            <input type="number" name="money" placeholder="Suma" value="money">
                             <button type="submit">Nuimti</button>
                             <a href="<?= URL ?>main.php">Cancel</a>
                         </form>
